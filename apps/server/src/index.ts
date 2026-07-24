@@ -21,11 +21,6 @@ app.use('/api/*', authMiddleware);
 
 app.get('/health', (c) => c.json({ status: 'ok' }));
 
-app.get('/debug/egress-ip', async (c) => {
-  const res = await fetch('https://api.ipify.org?format=json');
-  return c.json(await res.json());
-});
-
 app.route('/api/auth', authRoutes);
 
 app.use('/api/datasources/*', requireAuth);

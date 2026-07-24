@@ -1,0 +1,24 @@
+services:
+  - type: web
+    name: querydash-server-onhouse
+    runtime: docker
+    dockerfilePath: ./apps/server/Dockerfile
+    dockerContext: .
+    plan: starter
+    healthCheckPath: /health
+    envVars:
+      - key: DATABASE_URL
+        sync: false
+      - key: JWT_SECRET
+        sync: false
+      - key: ENCRYPTION_KEY
+        sync: false
+
+  - type: web
+    name: querydash-web-onhouse
+    runtime: docker
+    dockerfilePath: ./apps/web/Dockerfile
+    dockerContext: .
+    plan: starter
+    dockerBuildArgs:
+      NEXT_PUBLIC_API_BASE_URL: https://querydash-server-onhouse.onrender.com

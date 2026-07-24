@@ -1,0 +1,1 @@
+ALTER TABLE "dashboards" ADD COLUMN "refresh_interval" integer;
